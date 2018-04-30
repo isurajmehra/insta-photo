@@ -25,8 +25,8 @@ export class VisionComponent implements OnInit {
     this.file = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = (event: any) => {
-      this.imageSrc = event.target.result;
+    reader.onload = (ev: any) => {
+      this.imageSrc = ev.target.result;
     };
 
     reader.readAsDataURL(this.file);
