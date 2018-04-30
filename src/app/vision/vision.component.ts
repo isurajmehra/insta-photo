@@ -1,33 +1,35 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import { VisionService } from "../vision.service";
+import { VisionService } from '../vision.service';
 
 @Component({
-  selector: "app-vision",
-  templateUrl: "./vision.component.html",
-  styleUrls: ["./vision.component.css"]
+  selector: 'app-vision',
+  templateUrl: './vision.component.html',
+  styleUrls: ['./vision.component.css']
 })
 export class VisionComponent implements OnInit {
   imageSrc: string;
   response: string;
   error: string;
+  file: any;
 
-  constructor(private visionService: VisionService) {}
+  constructor(private visionService: VisionService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   previewImage(event: any) {
     if (!event.target.files && !event.target.files[0]) {
       return;
     }
 
-    var reader = new FileReader();
+    this.file = event.target.files[0];
+    const reader = new FileReader();
 
     reader.onload = (event: any) => {
       this.imageSrc = event.target.result;
     };
 
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(this.file);
   }
 
   analyzeButtonClick() {
@@ -35,7 +37,7 @@ export class VisionComponent implements OnInit {
       return;
     }
 
-    this.visionService.processImage(this.imageSrc).subscribe(
+    this.visionService.processImage(this.file).subscribe(
       data => (this.response = JSON.stringify(data.body, null, 2)), // success path
       error => (this.error = error) // error path
     );
