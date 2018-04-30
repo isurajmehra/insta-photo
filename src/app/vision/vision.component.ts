@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { VisionService } from '../vision.service';
-import { VisionAnalytics } from './model';
+import { VisionService } from "../vision.service";
+import { VisionAnalytics } from "./model";
 
 @Component({
-  selector: 'app-vision',
-  templateUrl: './vision.component.html',
-  styleUrls: ['./vision.component.css']
+  selector: "app-vision",
+  templateUrl: "./vision.component.html",
+  styleUrls: ["./vision.component.css"]
 })
 export class VisionComponent implements OnInit {
   imageSrc: string;
@@ -14,9 +14,9 @@ export class VisionComponent implements OnInit {
   error: string;
   file: any;
 
-  constructor(private visionService: VisionService) { }
+  constructor(private visionService: VisionService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   previewImage(event: any) {
     if (!event.target.files && !event.target.files[0]) {
@@ -40,8 +40,7 @@ export class VisionComponent implements OnInit {
 
     this.visionService.processImage(this.file).subscribe(
       (data: VisionAnalytics) => {
-
-        let result = '';
+        let result = "";
         data.description.captions.forEach(element => {
           result += `${element.text} `;
         });
@@ -51,9 +50,10 @@ export class VisionComponent implements OnInit {
         });
 
         this.captions = result;
-
       }, // success path
       error => (this.error = error) // error path
     );
   }
+
+  postButtonClick() {}
 }
