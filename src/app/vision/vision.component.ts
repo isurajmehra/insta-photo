@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { VisionService } from '../vision.service';
+import { VisionAnalytics } from './model';
 
 @Component({
   selector: 'app-vision',
@@ -9,7 +10,7 @@ import { VisionService } from '../vision.service';
 })
 export class VisionComponent implements OnInit {
   imageSrc: string;
-  response: string;
+  captions: string;
   error: string;
   file: any;
 
@@ -38,7 +39,20 @@ export class VisionComponent implements OnInit {
     }
 
     this.visionService.processImage(this.file).subscribe(
-      data => (this.response = JSON.stringify(data.body, null, 2)), // success path
+      (data: VisionAnalytics) => {
+
+        let result = '';
+        data.description.captions.forEach(element => {
+          result += `${element.text} `;
+        });
+
+        data.description.tags.forEach(element => {
+          result += `#${element} `;
+        });
+
+        this.captions = result;
+
+      }, // success path
       error => (this.error = error) // error path
     );
   }

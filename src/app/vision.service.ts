@@ -13,6 +13,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import 'rxjs/add/operator/catch';
 
 import { environment } from '../environments/environment';
+import { VisionAnalytics } from './vision/model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,14 +26,9 @@ const httpOptions = {
 export class VisionService {
   constructor(private http: HttpClient) { }
 
-  processImage(sourceImage): Observable<HttpResponse<any>> {
-
-    console.log(sourceImage);
-    const data = sourceImage;
-    console.log(data);
-
+  processImage(sourceImage): Observable<VisionAnalytics> {
     return this.http
-      .post(environment.visionapi_url, data, httpOptions)
+      .post(environment.visionapi_url, sourceImage, httpOptions)
       .catch((e: any) => Observable.throw(this.handleError(e)));
   }
 
