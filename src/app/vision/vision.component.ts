@@ -28,6 +28,8 @@ export class VisionComponent implements OnInit {
 
     reader.onload = (ev: any) => {
       this.imageSrc = ev.target.result;
+      this.error = "";
+      this.captions = "";
     };
 
     reader.readAsDataURL(this.file);
@@ -50,6 +52,7 @@ export class VisionComponent implements OnInit {
         });
 
         this.captions = result;
+        this.error = "Vision API call was successful!";
       }, // success path
       error => (this.error = error) // error path
     );

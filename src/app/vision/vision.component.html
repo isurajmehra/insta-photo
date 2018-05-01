@@ -9,6 +9,9 @@
           <textarea matInput placeholder="Analysis result" value="{{captions}}" matTextareaAutosize matAutosizeMinRows="5"></textarea>
         </mat-form-field>
       </div>
+      <div>
+        <mat-error *ngIf="error">{{error}}</mat-error>
+      </div>
     </mat-card-content>
     <mat-card-actions align="end">
       <button type="button" mat-raised-button (click)="imgFileInput.click()">Add a photo</button>
