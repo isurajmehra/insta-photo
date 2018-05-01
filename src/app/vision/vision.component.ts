@@ -55,5 +55,11 @@ export class VisionComponent implements OnInit {
     );
   }
 
-  postButtonClick() {}
+  postButtonClick() {
+    if (!this.imageSrc || !this.captions) {
+      return;
+    }
+
+    window.open("http://www.instagram.com");
+  }
 }
