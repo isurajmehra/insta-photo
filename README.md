@@ -1,8 +1,16 @@
-# Insta-Photo
+## Insta-Photo
 
 ![Alt text](/Screenshot.jpg?raw=true "Screenshot webpage")
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
+
+## Technology stack
+
+* Angular
+* Angular Material
+* Cognitive Services
+* Computer Vision API: analyze, describe
+* TypeScript model generated with json2ts.com
 
 ## Development server
 
